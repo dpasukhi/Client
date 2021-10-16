@@ -1,6 +1,6 @@
-QT += core gui
+QT += quick
 QT += core gui network
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
 
 CONFIG += c++11
 
@@ -11,16 +11,19 @@ CONFIG += c++11
 VPATH += ./src
 
 SOURCES += \
-    main.cpp \
-    mainwindow.cpp
+    main.cpp
 
-HEADERS += \
-    /include/mainwindow.h
+HEADERS +=
 
 INCLUDEPATH = ./include/
 
-FORMS += \
-    ui/mainwindow.ui
+RESOURCES += /qml/qml.qrc
+
+# Additional import path used to resolve QML modules in Qt Creator's code model
+QML_IMPORT_PATH =
+
+# Additional import path used to resolve QML modules just for Qt Quick Designer
+QML_DESIGNER_IMPORT_PATH =
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
