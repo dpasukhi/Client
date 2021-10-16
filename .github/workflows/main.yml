@@ -20,7 +20,7 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
     - name: qmake
-      run: qmake
+      run: qmake ./Client.pro
     - name: make
       run: ${{matrix.make}}
     - name: make check
