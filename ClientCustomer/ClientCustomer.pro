@@ -17,7 +17,7 @@ HEADERS +=
 
 INCLUDEPATH = ./include/
 
-RESOURCES += .\qml\qml.qrc
+RESOURCES += ./qml/qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -30,13 +30,13 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+DISTFILES += \
+  /qml/CustomerUI.qml \
+  /qml/CustomerUIForm.ui.qml
+
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../ClientCore/release/ -lClientCore
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../ClientCore/debug/ -lClientCore
 else:unix: LIBS += -L$$OUT_PWD/../ClientCore/ -lClientCore
 
-INCLUDEPATH += $$PWD/../ClientCore
-DEPENDPATH += $$PWD/../ClientCore
-
-DISTFILES += \
-  /qml/CustomerUI.qml \
-  /qml/CustomerUIForm.ui.qml
+INCLUDEPATH += $$PWD/../ClientCore/include/
+DEPENDPATH += $$PWD/../ClientCore/src/
