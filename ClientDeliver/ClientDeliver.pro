@@ -17,7 +17,7 @@ HEADERS +=
 
 INCLUDEPATH = ./include/
 
-RESOURCES += /qml/qml.qrc
+RESOURCES += .\qml\qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -36,3 +36,7 @@ else:unix: LIBS += -L$$OUT_PWD/../ClientCore/ -lClientCore
 
 INCLUDEPATH += $$PWD/../ClientCore
 DEPENDPATH += $$PWD/../ClientCore
+
+DISTFILES += \
+  /qml/DeliverUI.qml \
+  /qml/DeliverUIForm.ui.qml

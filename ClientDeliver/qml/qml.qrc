@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
+        <file>DeliverUI.qml</file>
+        <file>DeliverUIForm.ui.qml</file>
     </qresource>
 </RCC>
