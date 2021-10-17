@@ -2,5 +2,9 @@
     <qresource prefix="/">
         <file>CustomerUI.qml</file>
         <file>CustomerUIForm.ui.qml</file>
+        <file>PizzaItem.qml</file>
+        <file>../image/svg/Rustic-BBQ-(1).svg</file>
+        <file>../image/jpg/Rustic-BBQ-(1).jpg</file>
     </qresource>
+    <qresource prefix="/images"/>
 </RCC>
