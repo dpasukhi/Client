@@ -5,6 +5,8 @@
         <file>PizzaItem.qml</file>
         <file>../image/svg/Rustic-BBQ-(1).svg</file>
         <file>../image/jpg/Rustic-BBQ-(1).jpg</file>
+        <file>message.json</file>
+        <file>componentCreation.js</file>
     </qresource>
     <qresource prefix="/images"/>
 </RCC>
