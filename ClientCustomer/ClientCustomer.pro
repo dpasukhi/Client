@@ -11,9 +11,11 @@ CONFIG += c++11
 VPATH += ./src
 
 SOURCES += \
+    jsondata.cpp \
     main.cpp
 
-HEADERS +=
+HEADERS += \
+    jsondata.h
 
 INCLUDEPATH = ./include/
 
