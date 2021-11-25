@@ -3,4 +3,5 @@ TEMPLATE = subdirs
 SUBDIRS += \
   ClientCore \
   ClientCustomer \
-  ClientDeliver
+  ClientDeliver \
+  ClientManager
