@@ -22,7 +22,7 @@ Rectangle {
         anchors.top: parent.top
         width: parent.width
         height: 200
-        source: "file:///C:/Users/Oleg/Desktop/Client/ClientCustomer/image/jpg/Rustic-BBQ-(1).jpg"
+        source: "../image/jpg/Rustic-BBQ-(1).jpg"
     }
 
     Item{
