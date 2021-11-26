@@ -1,7 +1,7 @@
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 1.1
+import QtQuick 2.4
+import QtQuick.Layouts 1.15
+import QtQuick.Controls 2.15
 import QtQuick.Window 2.0
-import QtQuick 2.2
 import "componentCreation.js" as MyScript
 
 ApplicationWindow {
