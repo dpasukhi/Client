@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/">
+        <file>client.html</file>
+        <file>client.js</file>
+        <file>Customer_API.qml</file>
         <file>CustomerUI.qml</file>
         <file>CustomerUIForm.ui.qml</file>
         <file>PizzaItem.qml</file>
