@@ -33,9 +33,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+  /qml/Customer_API.qml \
   /qml/CustomerUI.qml \
   /qml/CustomerUIForm.ui.qml \
-  /qml/Customer_API.qml \
+
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../ClientCore/release/ -lClientCore
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../ClientCore/debug/ -lClientCore

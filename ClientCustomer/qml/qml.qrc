@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/">
+        <file>client.html</file>
+        <file>client.js</file>
+        <file>Customer_API.qml</file>
         <file>CustomerUI.qml</file>
         <file>CustomerUIForm.ui.qml</file>
         <file>PizzaItem.qml</file>
@@ -7,9 +10,6 @@
         <file>../image/jpg/Rustic-BBQ-(1).jpg</file>
         <file>message.json</file>
         <file>componentCreation.js</file>
-        <file>client.js</file>
-        <file>client.html</file>
-        <file>Customer_API.qml</file>
     </qresource>
     <qresource prefix="/images"/>
 </RCC>
