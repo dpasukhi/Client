@@ -4,4 +4,5 @@ SUBDIRS += \
   ClientCore \
   ClientCustomer \
   ClientDeliver \
-  ClientManager
+  ClientManager \
+  ClientTest
