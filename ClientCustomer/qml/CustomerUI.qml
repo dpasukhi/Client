@@ -1,12 +1,14 @@
-import QtQuick 2.4
+import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 import QtQuick.Window 2.0
 import "componentCreation.js" as MyScript
 
 ApplicationWindow {
-    width: 1024
-    height: 720
+    id: windowId
+
+    width: 1920
+    height: 1080
     visible: true
 
     color: "#f8f8f8"
@@ -16,7 +18,9 @@ ApplicationWindow {
 
         implicitWidth: 1920
         implicitHeight: 100
-        anchors.top: parent.top
+        anchors {
+            top: parent.top
+        }
         color: "white"
     }
 
@@ -25,54 +29,108 @@ ApplicationWindow {
 
         text: "Pizza Time"
         font.pixelSize: 25
-        anchors.left: gridId.left
-        anchors.verticalCenter: mainTableId.verticalCenter
+        anchors {
+            left: flickGrid.left
+            leftMargin: 10
+            verticalCenter: mainTableId.verticalCenter
+        }
     }
 
-    Rectangle {
+    MyButton {
         id: signId
 
         width: 80
         height: 40
-        color: "#50a684"
-        radius: 10
+        textButton: "Вход"
 
         anchors {
             verticalCenter: mainTableId.verticalCenter
-            right: gridId.right
+            right: flickGrid.right
+            rightMargin: 10
         }
 
-        Text {
-            id: textBuyId
-            text: "Вход"
-            font.pixelSize: 14
-            color: "white"
-            anchors.centerIn: parent
+        onPressed: {
+            if(tableRegis.visible === false)
+                tableSign.visible = true
         }
     }
 
-    GridLayout {
-        id: gridId
+    Basket {
+        id: menuBasket
+        anchors {
+            top: mainTableId.bottom
+            right: parent.right
+            topMargin: 15
+            rightMargin: 30
+        }
+    }
 
-        columns: 3
-        columnSpacing: 10
-        rowSpacing: 10
+    Flickable {
+        id: flickGrid
 
         anchors {
-            verticalCenter: parent.verticalCenter
-            horizontalCenter: parent.horizontalCenter
             top: mainTableId.bottom
-            topMargin: 35
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+            topMargin: 15
+            bottomMargin: 15
         }
+        clip: true
+        contentHeight: gridId.implicitHeight
+        ScrollBar.vertical: ScrollBar {}
 
-        Component.onCompleted: {
-            var num = json_class.getNum();
-            for (var i = 0; i < num; i++) {
-                var name = json_class.getName(i);
-                var description = json_class.getDescription(i);
-                var price = json_class.getPrice(i);
-                MyScript.createSpriteObjects(name, description, price);
+        GridLayout {
+            id: gridId
+
+            columns: 3
+            columnSpacing: 10
+            rowSpacing: 10
+
+            anchors {
+                centerIn: parent
+                top: parent.top
             }
+
+            Component.onCompleted: {
+                var num = json_class.getNum();
+                for (var i = 0; i < num; i++) {
+                    var name = json_class.getName(i);
+                    var description = json_class.getDescription(i);
+                    var price = json_class.getPrice(i);
+                    MyScript.createSpriteObjects(name, description, price);
+                }
+            }
+        }
+    }
+
+    TableSign {
+        id: tableSign
+
+        visible: false
+        width: 200
+        height: 175
+        anchors {
+            top: signId.bottom
+            right: signId.right
+            topMargin: 5
+        }
+        regButton.onPressed: {
+            tableSign.visible = false
+            tableRegis.visible = true
+        }
+    }
+
+    TableReg {
+        id: tableRegis
+
+        visible: false
+        width: 200
+        height: 400
+        anchors {
+            top: signId.bottom
+            right: signId.right
+            topMargin: 5
         }
     }
 }
