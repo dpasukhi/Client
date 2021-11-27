@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
   QQmlApplicationEngine engine;
 
   JsonData my_data;
-  my_data.jsonParse("C:/Users/Oleg/Desktop/Client/ClientCustomer/qml", "message.json");
+  my_data.jsonParse("../../Client/ClientCustomer/qml", "message.json");
   auto root_context = engine.rootContext();
   root_context->setContextProperty("json_class", &my_data);
 

@@ -9,9 +9,9 @@ Rectangle {
     property alias modelBasket: modelList
     property int helpInt: modelList.count > 0 ? 60 : 40
 
-    property string reaction_no: "file:///C:/Users/Oleg/Desktop/Client/ClientCustomer/image/svg/reaction_no.svg"
-    property string step_minus: "file:///C:/Users/Oleg/Desktop/Client/ClientCustomer/image/svg/step_minus.svg"
-    property string step_plus: "file:///C:/Users/Oleg/Desktop/Client/ClientCustomer/image/svg/step_plus.svg"
+    property string reaction_no: "../image/svg/reaction_no.svg"
+    property string step_minus: "../image/svg/step_minus.svg"
+    property string step_plus: "../image/svg/step_plus.svg"
 
     radius: 10
     color: "White"
@@ -88,7 +88,7 @@ Rectangle {
 
                     height: 50
                     width: 50
-                    source: "file:///C:/Users/Oleg/Desktop/Client/ClientCustomer/image/jpg/Rustic-BBQ-(1).jpg"
+                    source: "../image/jpg/Rustic-BBQ-(1).jpg"
                     anchors {
                         top: parent.top
                         left: parent.left

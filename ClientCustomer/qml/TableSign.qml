@@ -24,7 +24,7 @@ Rectangle {
         height: 16
         width: 16
         source: Image {
-            source: "file:///C:/Users/Oleg/Desktop/Client/ClientCustomer/image/svg/reaction_no.svg"
+            source: "../image/svg/reaction_no.svg"
         }
 
         MouseArea {
