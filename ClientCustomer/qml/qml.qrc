@@ -10,6 +10,14 @@
         <file>../image/jpg/Rustic-BBQ-(1).jpg</file>
         <file>message.json</file>
         <file>componentCreation.js</file>
+        <file>MyButton.qml</file>
+        <file>TableSign.qml</file>
+        <file>MyTextField.qml</file>
+        <file>../image/svg/reaction_no.svg</file>
+        <file>TableReg.qml</file>
+        <file>Basket.qml</file>
+        <file>../image/svg/step_minus.svg</file>
+        <file>../image/svg/step_plus.svg</file>
     </qresource>
     <qresource prefix="/images"/>
 </RCC>

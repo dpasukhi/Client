@@ -3,7 +3,6 @@ import QtQuick.Controls 2.15
 
 Rectangle {
     id: mainItemId
-    //border.color: "red"
 
     property alias source: pizzaImageId.source
     property alias textHeader: textHeaderId.text
@@ -42,7 +41,7 @@ Rectangle {
             spacing: 10
             anchors.top: itemId.bottom
 
-            TextEdit {
+            Text {
                 id: textHeaderId
 
                 width: itemId.width
@@ -51,7 +50,7 @@ Rectangle {
                 wrapMode: TextEdit.Wrap
             }
 
-            TextEdit {
+            Text {
                 id: textMainId
 
                 width: itemId.width
@@ -144,13 +143,11 @@ Rectangle {
         }
     }
 
-    Rectangle {
+    MyButton {
         id: buttobBuyId
 
         width: 80
         height: 40
-        color: "#50a684"
-        radius: 10
 
         anchors {
             bottom: parent.bottom
@@ -159,13 +156,29 @@ Rectangle {
             bottomMargin: 15
         }
 
-        Text {
-            id: textBuyId
-            text: "В корзину"
-            font.pixelSize: 14
-            color: "white"
-            anchors.centerIn: parent
-            anchors.verticalCenter: buttobBuyId.verticalCenter
+        textButton: "В корзину"
+        onPressed: menuBasket.modelBasket.append({name1: textHeaderId.text, name2: getTabBar(), name3: getsizePizza(), cost: priceId.text})
+        function getsizePizza() {
+            if(sizePizzaId.currentIndex == 0){
+                return "23"
+            }
+            if(sizePizzaId.currentIndex == 1){
+                return "30"
+            }
+            if(sizePizzaId.currentIndex == 2){
+                return "35"
+            }
+            if(sizePizzaId.currentIndex == 3){
+                return "40"
+            }
+        }
+
+        function getTabBar() {
+            if(tabBar.currentIndex == 0){
+                return "Традиционное"
+            } else {
+                return "Тонкое"
+            }
         }
     }
 
