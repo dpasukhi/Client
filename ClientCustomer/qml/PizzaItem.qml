@@ -157,7 +157,7 @@ Rectangle {
         }
 
         textButton: "В корзину"
-        onPressed: menuBasket.modelBasket.append({name1: textHeaderId.text, name2: getTabBar(), name3: getsizePizza(), cost: priceId.text})
+        onPressed: menuBasket.modelBasket.append({name1: textHeaderId.text, name2: getTabBar(), name3: getsizePizza(), cost: priceId.text, number: 1})
         function getsizePizza() {
             if(sizePizzaId.currentIndex == 0){
                 return "23"
