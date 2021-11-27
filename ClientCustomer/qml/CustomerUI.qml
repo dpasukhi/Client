@@ -55,16 +55,6 @@ ApplicationWindow {
         }
     }
 
-    Basket {
-        id: menuBasket
-        anchors {
-            top: mainTableId.bottom
-            right: parent.right
-            topMargin: 15
-            rightMargin: 30
-        }
-    }
-
     Flickable {
         id: flickGrid
 
@@ -101,6 +91,16 @@ ApplicationWindow {
                     MyScript.createSpriteObjects(name, description, price);
                 }
             }
+        }
+    }
+
+    Basket {
+        id: menuBasket
+        anchors {
+            top: mainTableId.bottom
+            right: parent.right
+            topMargin: 15
+            rightMargin: 30
         }
     }
 

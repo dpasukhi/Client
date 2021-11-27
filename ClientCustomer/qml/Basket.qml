@@ -7,7 +7,7 @@ Rectangle {
     id: control
 
     property alias modelBasket: modelList
-    property int helpInt: modelList.count > 0 ? 60 : 40
+    property int helpInt: modelList.count > 0 ? 80 : 40
 
     property string reaction_no: "../image/svg/reaction_no.svg"
     property string step_minus: "../image/svg/step_minus.svg"
@@ -48,6 +48,40 @@ Rectangle {
         font.pixelSize: 12
     }
 
+    Text {
+        id: textSum
+
+        visible: modelList.count > 0 ? true : false
+        text: "Сумма заказа: "
+        font.pixelSize: 12
+        anchors {
+            bottom: orderButton.top
+            left: parent.left
+            bottomMargin: 5
+            leftMargin: 5
+        }
+    }
+
+    Text {
+        visible: modelList.count > 0 ? true : false
+        text: sumOrder()
+        font.pixelSize: 12
+        anchors {
+            bottom: orderButton.top
+            right: parent.right
+            rightMargin: 5
+            bottomMargin: 5
+        }
+
+        function sumOrder(){
+            var sum = 0
+            for(var i = 0; i < modelList.count; i++){
+                sum +=  parseInt(modelList.get(i).cost * modelList.get(i).number)
+            }
+            return sum.toString()
+        }
+    }
+
     MyButton {
         id: orderButton
 
@@ -81,6 +115,10 @@ Rectangle {
                     anchors {
                         top: parent.top
                         right: parent.right
+                    }
+                    MouseArea {
+                        anchors.fill: parent
+                        onPressed: modelList.remove(index)
                     }
                 }
                 Image {
@@ -137,14 +175,15 @@ Rectangle {
                                 }
                             }
                         }
-                        onPressed: console.log("Yffdgfdgfgdfg")
+                        onPressed: if(number > 1) {
+                                       number--
+                                   }
                     }
                     Text {
                         id: textNum
 
                         font.pixelSize: 14
-                        property int num: 1
-                        text: num.toString()
+                        text: number
                     }
                     Button {
                         width: 16
@@ -162,7 +201,7 @@ Rectangle {
                                 }
                             }
                         }
-                        onPressed: textNum.num++
+                        onPressed: number++
                     }
                 }
                 Text {
