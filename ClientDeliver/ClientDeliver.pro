@@ -1,6 +1,6 @@
 QT += quick
 QT += core gui network
-
+QT += quick webview
 
 CONFIG += c++11
 
@@ -11,11 +11,17 @@ CONFIG += c++11
 VPATH += ./src
 
 SOURCES += \
-    clientdeliverapi.cpp \
-    main.cpp
+    src/main.cpp \
+    src/changefilejs.cpp \
+    src/jsondata.cpp \
+    src/writefile.cpp \
+    src/clientdeliverapi.cpp
 
 HEADERS += \
-  include/clientdeliverapi.h
+    include/changefilejs.h \
+    include/jsondata.h \
+    include/writefile.h \
+    include/clientdeliverapi.h
 
 INCLUDEPATH = ./include/
 

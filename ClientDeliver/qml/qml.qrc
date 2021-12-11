@@ -2,5 +2,15 @@
     <qresource prefix="/">
         <file>DeliverUI.qml</file>
         <file>DeliverUIForm.ui.qml</file>
+        <file>componentCreation.js</file>
+        <file>message.json</file>
+        <file>MyButton.qml</file>
+        <file>MyTextField.qml</file>
+        <file>TableSign.qml</file>
+        <file>../image/svg/reaction_no.svg</file>
+        <file>OrderItem.qml</file>
+        <file>clientDeliver.html</file>
+        <file>clientDeliver.js</file>
+        <file>MyWebView.qml</file>
     </qresource>
 </RCC>
