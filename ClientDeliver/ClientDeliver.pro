@@ -1,6 +1,6 @@
 QT += quick
 QT += core gui network
-
+QT += quick webview
 
 CONFIG += c++11
 
@@ -11,9 +11,15 @@ CONFIG += c++11
 VPATH += ./src
 
 SOURCES += \
-    main.cpp
+    main.cpp \
+    src/changefilejs.cpp \
+    src/jsondata.cpp \
+    src/writefile.cpp
 
-HEADERS +=
+HEADERS += \
+    src/changefilejs.h \
+    src/jsondata.h \
+    src/writefile.h
 
 INCLUDEPATH = ./include/
 
