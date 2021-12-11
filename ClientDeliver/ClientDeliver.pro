@@ -11,9 +11,11 @@ CONFIG += c++11
 VPATH += ./src
 
 SOURCES += \
+    clientdeliverapi.cpp \
     main.cpp
 
-HEADERS +=
+HEADERS += \
+  include/clientdeliverapi.h
 
 INCLUDEPATH = ./include/
 

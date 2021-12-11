@@ -11,11 +11,13 @@ CONFIG += c++11
 VPATH += ./src
 
 SOURCES += \
+    clientmanagerapi.cpp \
     jsondata.cpp \
     main.cpp
 
 HEADERS += \
-    jsondata.h
+    include/clientmanagerapi.h \
+    include/jsondata.h
 
 INCLUDEPATH = ./include/
 
