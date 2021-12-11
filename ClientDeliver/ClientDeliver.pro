@@ -11,16 +11,16 @@ CONFIG += c++11
 VPATH += ./src
 
 SOURCES += \
-    main.cpp \
+    src/main.cpp \
     src/changefilejs.cpp \
     src/jsondata.cpp \
     src/writefile.cpp \
-    clientdeliverapi.cpp
+    src/clientdeliverapi.cpp
 
 HEADERS += \
-    src/changefilejs.h \
-    src/jsondata.h \
-    src/writefile.h \
+    include/changefilejs.h \
+    include/jsondata.h \
+    include/writefile.h \
     include/clientdeliverapi.h
 
 INCLUDEPATH = ./include/
