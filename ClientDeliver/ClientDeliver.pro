@@ -14,12 +14,14 @@ SOURCES += \
     main.cpp \
     src/changefilejs.cpp \
     src/jsondata.cpp \
-    src/writefile.cpp
+    src/writefile.cpp \
+    clientdeliverapi.cpp
 
 HEADERS += \
     src/changefilejs.h \
     src/jsondata.h \
-    src/writefile.h
+    src/writefile.h \
+    include/clientdeliverapi.h
 
 INCLUDEPATH = ./include/
 
