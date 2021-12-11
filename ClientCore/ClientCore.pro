@@ -2,7 +2,7 @@ QT -= gui
 
 TEMPLATE = lib
 DEFINES += CLIENTCORE_LIBRARY
-
+QT += core network
 CONFIG += c++11
 
 # You can make your code fail to compile if it uses deprecated APIs.

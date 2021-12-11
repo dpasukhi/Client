@@ -11,11 +11,13 @@ CONFIG += c++11
 VPATH += ./src
 
 SOURCES += \
+    clientcustomerapi.cpp \
     jsondata.cpp \
     main.cpp
 
 HEADERS += \
-    jsondata.h
+    include/clientcustomerapi.h \
+    include/jsondata.h
 
 INCLUDEPATH = ./include/
 
