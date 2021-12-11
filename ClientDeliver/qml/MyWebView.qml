@@ -8,25 +8,13 @@ WebView {
     visible: true
     anchors.fill: parent
 
+    onLoadProgressChanged: {
+        if (windowId.flag === true)
+            webView.destroy();
+    }
 
     onLoadingChanged: {
         if (loadRequest.errorString)
             console.error(loadRequest.errorString);
-    }
-
-    MyButton {
-
-        visible: true
-        width: 100
-        textButton: "Подтвердить"
-        anchors {
-            right: parent.right
-            bottom: parent.bottom
-            rightMargin: 25
-            bottomMargin: 25
-        }
-        onPressed: {
-            deliverMenu.visible = true
-        }
     }
 }

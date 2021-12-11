@@ -149,6 +149,7 @@ ApplicationWindow {
                 var tmp = ChangeFileJS.setNewLine(office_adress, order_adress)
                 var component = Qt.createComponent("MyWebView.qml");
                 var sprite = component.createObject(webviewItem, {url: "/clientDeliver.html"});
+                buttonWebView.visible = true
             }
         }
 
@@ -174,6 +175,23 @@ ApplicationWindow {
     Item {
         id: webviewItem
         anchors.fill: parent
+    }
+
+    MyButton {
+        id: buttonWebView
+
+        visible: false
+        width: 100
+        textButton: "Подтвердить"
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+            rightMargin: 25
+            bottomMargin: 25
+        }
+        onPressed: {
+            deliverMenu.visible = true
+        }
     }
 
     Rectangle {
@@ -206,7 +224,7 @@ ApplicationWindow {
             }
             onPressed: {
                 deliverMenu.visible = false
-                webviewItem.destroy()
+                buttonWebView.visible = false
                 var tmp = ChangeFileJS.reset()
                 gridId.visible = true
             }

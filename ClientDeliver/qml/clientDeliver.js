@@ -1,5 +1,3 @@
-var office_address = "улица Академика Сахарова, 113к1"
-var order_address = "Цветочная улица, 7к2"
                              
     ymaps.ready(function () { 
         var myMap = new ymaps.Map('map', { 
