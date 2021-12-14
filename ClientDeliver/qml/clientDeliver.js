@@ -1,3 +1,5 @@
+var office_address = ""
+var order_address = ""
                              
     ymaps.ready(function () { 
         var myMap = new ymaps.Map('map', { 
@@ -13,7 +15,7 @@
                                                                                               
         control.routePanel.state.set({                                                        
             type: 'auto',                                                                   
-            fromEnabled: true,                                                                
+            fromEnabled: false,                                                                
             from: office_address,                                                             
             to: order_address,                                                                
             toEnabled: false                                                                  

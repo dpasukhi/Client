@@ -23,7 +23,7 @@ Button {
     onPressed: {
         windowId.office_adress = office_adress
         windowId.order_adress = order_adress
-        //var tmp = ChangeFileJS.setNewLine(office_adress, order_adress)
+        windowId.tmp_order = mainItemId
         accessMenu.visible = true
         gridId.visible = false
     }

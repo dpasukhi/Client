@@ -8,11 +8,6 @@ WebView {
     visible: true
     anchors.fill: parent
 
-    onLoadProgressChanged: {
-        if (windowId.flag === true)
-            webView.destroy();
-    }
-
     onLoadingChanged: {
         if (loadRequest.errorString)
             console.error(loadRequest.errorString);
