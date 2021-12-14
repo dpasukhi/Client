@@ -12,6 +12,9 @@ ApplicationWindow {
     property bool signInSuccess: true
     property string office_adress: ""
     property string order_adress: ""
+    property var tmp_webview: undefined
+    property var tmp_order: undefined
+    property var list_order: []
 
     width: 1920
     height: 1080
@@ -89,11 +92,13 @@ ApplicationWindow {
             Component.onCompleted: {
                 var num = json_class.getNum();
                 for (var i = 0; i < num; i++) {
-                    var name = json_class.getName(i);
-                    var id_order = json_class.getId_order(i);
-                    var office_adress = json_class.getOffice_adress(i);
-                    var order_adress = json_class.getOrder_adress(i);
-                    MyScript.createSpriteObjects(name, id_order, office_adress, order_adress);
+                    let name = json_class.getName(i);
+                    let id_order = json_class.getId_order(i);
+                    let office_adress = json_class.getOffice_adress(i);
+                    let order_adress = json_class.getOrder_adress(i);
+                    let comp = Qt.createComponent("OrderItem.qml");
+                    let obj = comp.createObject(gridId, {textHeader: name, id_order: id_order, office_adress: office_adress, order_adress: order_adress});
+                    list_order.push(obj)
                 }
             }
         }
@@ -145,10 +150,11 @@ ApplicationWindow {
                 bottomMargin: 10
             }
             onPressed: {
+                buttonUpdate.visible = false
                 accessMenu.visible = false
                 var tmp = ChangeFileJS.setNewLine(office_adress, order_adress)
                 var component = Qt.createComponent("MyWebView.qml");
-                var sprite = component.createObject(webviewItem, {url: "/clientDeliver.html"});
+                tmp_webview = component.createObject(webviewItem, {url: "/clientDeliver.html"});
                 buttonWebView.visible = true
             }
         }
@@ -223,9 +229,14 @@ ApplicationWindow {
                 bottomMargin: 10
             }
             onPressed: {
+                buttonUpdate.visible = true
                 deliverMenu.visible = false
                 buttonWebView.visible = false
+                tmp_webview.destroy()
                 var tmp = ChangeFileJS.reset()
+                var num = list_order.indexOf(tmp_order, 0)
+                list_order.splice(num, 1)
+                tmp_order.destroy()
                 gridId.visible = true
             }
         }
@@ -244,6 +255,39 @@ ApplicationWindow {
             }
             onPressed: {
                 deliverMenu.visible = false
+            }
+        }
+    }
+
+    MyButton {
+        id: buttonUpdate
+
+        width: 100
+        textButton: "Обновить"
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+            rightMargin: 15
+            bottomMargin: 15
+        }
+
+        onPressed: {
+            for(var k = 0; k < list_order.length; k++) {
+                list_order[k].destroy()
+            }
+            while(list_order.length != 0) {
+                list_order.pop()
+            }
+
+            var num = json_class.getNum();
+            for(var j = 0; j < num; j++) {
+                let name = json_class.getName(j);
+                let id_order = json_class.getId_order(j);
+                let office_adress = json_class.getOffice_adress(j);
+                let order_adress = json_class.getOrder_adress(j);
+                let comp = Qt.createComponent("OrderItem.qml");
+                let obj = comp.createObject(gridId, {textHeader: name, id_order: id_order, office_adress: office_adress, order_adress: order_adress});
+                list_order.push(obj)
             }
         }
     }
