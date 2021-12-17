@@ -6,7 +6,12 @@
         <file>../image/svg/Rustic-BBQ-(1).svg</file>
         <file>../image/jpg/Rustic-BBQ-(1).jpg</file>
         <file>message.json</file>
-        <file>componentCreation.js</file>
+        <file>MyButton.qml</file>
+        <file>MyTextField.qml</file>
+        <file>OrderItem.qml</file>
+        <file>TableSign.qml</file>
+        <file>../image/svg/reaction_no.svg</file>
+        <file>InfoOrder.qml</file>
     </qresource>
     <qresource prefix="/images"/>
 </RCC>
