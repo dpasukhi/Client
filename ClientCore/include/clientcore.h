@@ -3,35 +3,63 @@
 
 #include "ClientCore_global.h"
 #include <QNetworkAccessManager>
-
-class QNetworkReply;
+#include <QByteArray>
 
 class CLIENTCORE_EXPORT ClientCore
 {
 public:
+
+  enum operations
+  {
+    product_list = 0,
+    authorization,
+    registration,
+    order_list,
+    office_list,
+    order_send
+  };
+  enum clients
+  {
+    customer = 0,
+    deliver,
+    manager,
+  };
+
   ClientCore();
-  virtual int Authorization(const QString& theLogin, const QString& thePassword) = 0;
-  void SetHeader(const QString& HeaderName, const QString& HeaderValue);
-public slots:
-  // Method of canceling the load
-  void cancelDownload();
 
-signals:
-  // A signal that sends information about the progress of the download
-  void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
+  Q_INVOKABLE void Authorization(const QString& theLogin,
+                                 const QString& thePassword);
 
-private slots:
-  // Slot for gradual reading of downloaded data
-  void onReadyRead();
-  // Slot for processing request completion
-  void onReply(QNetworkReply* reply);
+  Q_INVOKABLE bool SendRecieve(QNetworkRequest& theRequest,
+                               const QByteArray& thePostData,
+                               const operations theOp,
+                               const clients theClient);
+
+  bool GetResult(QByteArray& theArray,
+                 QNetworkReply* theReply);
 
 private:
+
+  void initRequest(QNetworkRequest& theRequest,
+                   const operations theOp,
+                   const clients theClient);
+
+  QString GetTypeSend(const operations theOp);
+
+  QString GetTypeClient(const clients theClient);
+
+  QNetworkReply* Send(QNetworkRequest& theRequest,
+                      const QByteArray& thePostData,
+                      const operations theOp,
+                      const clients theClient);
+
+private:
+  bool myIsGetted {false};
   QByteArray m_cache;
-  QString HeaderName;
   QString login;
   QString password;
-  QString HeaderValue;
+  const QString url = "http://127.0.0.1:8800/";
+  QNetworkReply* m_currentReply {nullptr};    // Current request being processed
   QNetworkAccessManager m_manager;            // Network manager for downloading files
 };
 

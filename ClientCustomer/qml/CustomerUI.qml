@@ -84,11 +84,11 @@ ApplicationWindow {
             }
 
             Component.onCompleted: {
-                var num = json_class.getNum();
+                var num = api_class.getProductCount();
                 for (var i = 0; i < num; i++) {
-                    var name = json_class.getName(i);
-                    var description = json_class.getDescription(i);
-                    var price = json_class.getPrice(i);
+                    var name = api_class.getProductName(i);
+                    var description = api_class.getProductDescription(i);
+                    var price = api_class.getProductPrice(i);
                     MyScript.createSpriteObjects(name, description, price);
                 }
             }

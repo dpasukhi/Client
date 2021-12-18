@@ -154,7 +154,8 @@ ApplicationWindow {
                 accessMenu.visible = false
                 var tmp = ChangeFileJS.setNewLine(office_adress, order_adress)
                 var component = Qt.createComponent("MyWebView.qml");
-                tmp_webview = component.createObject(webviewItem, {url: "/clientDeliver.html"});
+                tmp_webview = component.createObject(webviewItem,
+                                                     {url: "file:///clientDeliver.html"});
                 buttonWebView.visible = true
             }
         }
