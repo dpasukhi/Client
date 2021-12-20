@@ -93,6 +93,7 @@ Rectangle {
             bottomMargin: 5
             rightMargin: 5
         }
+        onPressed: buyMenu.visible = true
     }
 
     ColumnLayout {

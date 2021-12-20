@@ -23,6 +23,7 @@ void JsonData::jsonParse(QString JsonPath, QString JsonName)
     {
         QJsonObject json = doc.object();
         QJsonArray jsonArray = json["pizza"].toArray();
+        QJsonArray jsonArrayOffice = json["office"].toArray();
         foreach (const QJsonValue & value, jsonArray)
         {
             if (value.isObject())
@@ -32,6 +33,14 @@ void JsonData::jsonParse(QString JsonPath, QString JsonName)
                 this->description.push_back(obj["description"].toString());
                 this->price.push_back(obj["price"].toString());
                 this->num += 1;
+            }
+        }
+        foreach (const QJsonValue & value, jsonArrayOffice)
+        {
+            if (value.isObject())
+            {
+                QJsonObject obj = value.toObject();
+                this->office.append(obj["name_office"].toString());
             }
         }
     }
@@ -55,4 +64,9 @@ QString JsonData::getDescription(qint32 num)
 QString JsonData::getPrice(qint32 num)
 {
   return this->price.at(num);
+}
+
+QStringList JsonData::getDataOffice()
+{
+  return this->office;
 }

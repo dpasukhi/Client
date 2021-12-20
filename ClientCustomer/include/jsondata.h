@@ -23,12 +23,14 @@ public:
     Q_INVOKABLE QString getName(qint32 num);
     Q_INVOKABLE QString getDescription(qint32 num);
     Q_INVOKABLE QString getPrice(qint32 num);
+    QStringList getDataOffice();
 
 private:
     qint8 num = 0;
     QVector <QString> name;
     QVector <QString> description;
     QVector <QString> price;
+    QStringList office;
 
 signals:
 
