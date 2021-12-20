@@ -18,6 +18,7 @@ T.TextField {
   topPadding: 1
   bottomPadding: 1
   verticalAlignment: TextInput.AlignVCenter
+  validator: RegExpValidator{regExp: /[A-z]+/}
 
   background: Rectangle {
     id: backRect
@@ -43,4 +44,34 @@ T.TextField {
       bottomMargin: rootComponent.hint == topHint ? 1 : 0
     }
   }
+
+  Rectangle{
+      id: rootComponentRec
+
+      visible: true
+      color: "red"
+      radius: 20
+      width: 15
+      height: 15
+      anchors.verticalCenter: parent.verticalCenter
+      anchors.right: parent.right
+      transform: Translate {x:-10}
+
+      Text{
+          text: "!"
+          anchors.centerIn: parent
+          color: "white"
+      }
+  }
+
+  states: [
+      State{
+          name: "not empty"
+          when: rootComponent.acceptableInput
+          PropertyChanges {
+              target: rootComponentRec
+              visible: false
+          }
+      }
+  ]
 }

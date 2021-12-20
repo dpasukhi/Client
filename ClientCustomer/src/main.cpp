@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
   my_data.jsonParse("../../Client/ClientCustomer/qml", "message.json");
   auto root_context = engine.rootContext();
   root_context->setContextProperty("json_class", &my_data);
+  root_context->setContextProperty("myModel", QVariant::fromValue(my_data.getDataOffice()));
 
   const QUrl url(QStringLiteral("qrc:/CustomerUI.qml"));
   QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

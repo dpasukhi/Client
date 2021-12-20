@@ -1,4 +1,15 @@
 {
+    "office" : [
+      {
+          "name_office": "Офис 1"
+      },
+      {
+          "name_office": "Офис 2"
+      },
+      {
+          "name_office": "Офис 3"
+      }
+    ],
     "pizza": [
        {
           "name": "Деревенское Барбекю",
