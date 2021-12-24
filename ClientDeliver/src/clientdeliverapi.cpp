@@ -40,7 +40,7 @@ bool ClientDeliverAPI::requestOrders(const QString& thePath)
 }
 
 bool ClientDeliverAPI::sendStatus(const qint32 theOrderID,
-                                  const ClientDeliverAPI::status& theStatus)
+                                  const qint32& theStatus)
 {
   return true;
 }

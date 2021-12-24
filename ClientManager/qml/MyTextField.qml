@@ -3,12 +3,12 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Templates 2.15 as T
 
-TextField {
+T.TextField {
     id: rootComponent
 
     readonly property int topHint: 0
     readonly property int bottomHint: 1
-
+    property bool statusFill: false
     property int hint: -1
     property string hintText: ""
 
@@ -19,6 +19,7 @@ TextField {
     bottomPadding: 1
     verticalAlignment: TextInput.AlignVCenter
     validator: RegExpValidator{regExp: /[A-z]+/}
+
     background: Rectangle {
         id: backRect
 
@@ -70,6 +71,10 @@ TextField {
             PropertyChanges {
                 target: rootComponentRec
                 visible: false
+            }
+            PropertyChanges {
+                target: rootComponent
+                statusFill: true
             }
         }
     ]
