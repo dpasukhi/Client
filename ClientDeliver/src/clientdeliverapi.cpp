@@ -1,6 +1,6 @@
 #include "clientdeliverapi.h"
 
-ClientDeliverAPI::ClientDeliverAPI()
+ClientDeliverAPI::ClientDeliverAPI(QObject *parent) : QObject(parent)
 {
 
 }

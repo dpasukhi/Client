@@ -12,12 +12,10 @@ VPATH += ./src
 
 SOURCES += \
     clientcustomerapi.cpp \
-    jsondata.cpp \
     main.cpp
 
 HEADERS += \
-    include/clientcustomerapi.h \
-    include/jsondata.h
+    include/clientcustomerapi.h
 
 INCLUDEPATH = ./include/
 

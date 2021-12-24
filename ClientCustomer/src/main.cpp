@@ -1,8 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <clientcore.h>
-#include "jsondata.h"
+#include "clientcustomerapi.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,11 +11,12 @@ int main(int argc, char *argv[])
 
   QQmlApplicationEngine engine;
 
-  JsonData my_data;
-  my_data.jsonParse("../../Client/ClientCustomer/qml", "message.json");
+  ClientCustomerAPI myAPI;
+  myAPI.requestProducts("../../Client/ClientCustomer/qml/message.json");
+  myAPI.requestOffices("../../Client/ClientCustomer/qml/office.json");
   auto root_context = engine.rootContext();
-  root_context->setContextProperty("json_class", &my_data);
-  root_context->setContextProperty("myModel", QVariant::fromValue(my_data.getDataOffice()));
+  root_context->setContextProperty("api_class", &myAPI);
+  root_context->setContextProperty("myModel", QVariant::fromValue(myAPI.getDataOffice()));
 
   const QUrl url(QStringLiteral("qrc:/CustomerUI.qml"));
   QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

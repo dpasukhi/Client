@@ -1,13 +1,14 @@
 #ifndef CLIENTMANAGERAPI_H
 #define CLIENTMANAGERAPI_H
 
-#include <clientcore.h>
+//#include <clientcore.h>
+#include <QObject>
 
-class ClientManagerAPI : public ClientCore
+class ClientManagerAPI : public QObject
 {
+  Q_OBJECT
 public:
-  ClientManagerAPI();
-  int Authorization(const QString& theLogin, const QString& thePassword) { return  -1;};
+  explicit ClientManagerAPI(QObject *parent);
 };
 
 #endif // CLIENTMANAGERAPI_H

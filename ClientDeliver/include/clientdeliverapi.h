@@ -1,14 +1,15 @@
 #ifndef CLIENTDELIVERAPI_H
 #define CLIENTDELIVERAPI_H
 
-#include <clientcore.h>
+//#include <clientcore.h>
+#include <QObject>
 
-class ClientDeliverAPI : public ClientCore
+class ClientDeliverAPI : public QObject
 {
+  Q_OBJECT
 public:
-  ClientDeliverAPI();
+  explicit ClientDeliverAPI(QObject *parent);
 
-  int Authorization(const QString& theLogin, const QString& thePassword) { return  -1;};
 };
 
 #endif // CLIENTDELIVERAPI_H

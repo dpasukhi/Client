@@ -1,6 +1,6 @@
 #include "clientmanagerapi.h"
 
-ClientManagerAPI::ClientManagerAPI()
+ClientManagerAPI::ClientManagerAPI(QObject *parent) : QObject(parent)
 {
 
 }
