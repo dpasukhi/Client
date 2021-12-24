@@ -48,6 +48,7 @@ ApplicationWindow {
     MyButton {
         id: signId
 
+        property bool signOk: false
         width: 80
         height: 40
         textButton: "Вход"
@@ -58,7 +59,30 @@ ApplicationWindow {
             rightMargin: 10
         }
 
-        onPressed: tableSign.visible = true
+        onPressed: {
+            if(signId.signOk) {
+                signId.textButton = "Вход"
+                signId.signOk = false
+                loginUser.visible = false
+            } else {
+                tableSign.visible = true
+            }
+        }
+
+        Text {
+            id: loginUser
+
+            font.pixelSize: 14
+            color: "black"
+            visible: false
+            text: ""
+            anchors {
+                right: parent.left
+                rightMargin: 10
+                verticalCenter: parent.verticalCenter
+            }
+        }
+
     }
 
     Flickable {
@@ -115,9 +139,17 @@ ApplicationWindow {
             right: signId.right
             topMargin: 5
         }
-        regButton.onPressed: {
-            tableSign.visible = false
-            tableRegis.visible = true
+        signButton.onPressed: {
+            if(tableSign.signReady) {
+                if(json_class.authorization(tableSign.login, tableSign.password)) {
+                    tableSign.visible = false
+                    loginUser.text = tableSign.login
+                    loginUser.visible = true
+                    signId.textButton = "Выйти"
+                    signId.signOk = true
+                    tableSign.clearField()
+                }
+            }
         }
     }
 
@@ -230,15 +262,17 @@ ApplicationWindow {
                 bottomMargin: 10
             }
             onPressed: {
-                buttonUpdate.visible = true
-                deliverMenu.visible = false
-                buttonWebView.visible = false
-                tmp_webview.destroy()
-                var tmp = ChangeFileJS.reset()
-                var num = list_order.indexOf(tmp_order, 0)
-                list_order.splice(num, 1)
-                tmp_order.destroy()
-                gridId.visible = true
+                if(json_class.sendStatus(tmp_order.id_order, 2)) {
+                    buttonUpdate.visible = true
+                    deliverMenu.visible = false
+                    buttonWebView.visible = false
+                    tmp_webview.destroy()
+                    var tmp = ChangeFileJS.reset()
+                    var num = list_order.indexOf(tmp_order, 0)
+                    list_order.splice(num, 1)
+                    tmp_order.destroy()
+                    gridId.visible = true
+                }
             }
         }
 

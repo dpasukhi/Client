@@ -24,7 +24,7 @@ public:
 
   Q_INVOKABLE bool requestOrders(const QString& thePath);
 
-  Q_INVOKABLE bool sendStatus(const qint32 theOrderID, const status& theStatus);
+  Q_INVOKABLE bool sendStatus(const qint32 theOrderID, const qint32& theStatus);
 
   Q_INVOKABLE qint32 getOrderCount() const { return myOrderCount; }
 
