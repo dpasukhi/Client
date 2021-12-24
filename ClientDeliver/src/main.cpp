@@ -2,9 +2,9 @@
 #include <QQmlApplicationEngine>
 #include <clientcore.h>
 #include <QQmlContext>
-#include "jsondata.h"
 #include "changefilejs.h"
 #include <QtWebView/QtWebView>
+#include <clientdeliverapi.h>
 
 int main(int argc, char *argv[])
 {
@@ -16,9 +16,9 @@ int main(int argc, char *argv[])
 
   QQmlApplicationEngine engine;
 
-  JsonData my_data;
+  ClientDeliverAPI my_data;
   ChangeFileJS changeSome;
-  my_data.jsonParse("../../Client/ClientDeliver/qml", "message.json");
+  my_data.requestOrders("../../Client/ClientDeliver/qml/message.json");
   auto root_context = engine.rootContext();
   root_context->setContextProperty("json_class", &my_data);
   root_context->setContextProperty("ChangeFileJS", &changeSome);

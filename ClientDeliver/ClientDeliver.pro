@@ -13,12 +13,10 @@ VPATH += ./src
 SOURCES += \
     src/main.cpp \
     src/changefilejs.cpp \
-    src/jsondata.cpp \
     src/clientdeliverapi.cpp
 
 HEADERS += \
     include/changefilejs.h \
-    include/jsondata.h \
     include/clientdeliverapi.h
 
 INCLUDEPATH = ./include/
