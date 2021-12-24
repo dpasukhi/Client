@@ -10,10 +10,10 @@ class ClientCustomerAPI : public QObject
 public:
   explicit ClientCustomerAPI(QObject *parent = nullptr);
 
-  Q_INVOKABLE bool Authorization(const QString& theLogin,
+  Q_INVOKABLE bool authorization(const QString& theLogin,
                                  const QString& thePassword);
 
- Q_INVOKABLE  bool Registration(const QString& theName,
+ Q_INVOKABLE  bool registration(const QString& theName,
                                 const QString& theMiddleName,
                                 const QString& theLastName,
                                 const QString& thePhone,

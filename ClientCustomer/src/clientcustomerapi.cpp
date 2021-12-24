@@ -15,7 +15,7 @@ ClientCustomerAPI::ClientCustomerAPI(QObject *parent) : QObject(parent)
   clear();
 }
 
-bool ClientCustomerAPI::Authorization(const QString& theLogin,
+bool ClientCustomerAPI::authorization(const QString& theLogin,
                                       const QString& thePassword)
 {
   QByteArray aLogin(theLogin.toStdString().c_str());
@@ -36,7 +36,7 @@ bool ClientCustomerAPI::Authorization(const QString& theLogin,
   return false;
 }
 
-bool ClientCustomerAPI::Registration(const QString& theName,
+bool ClientCustomerAPI::registration(const QString& theName,
                                      const QString& theMiddleName,
                                      const QString& theLastName,
                                      const QString& thePhone,
