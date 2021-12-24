@@ -8,6 +8,7 @@ Rectangle {
 
     property alias modelBasket: modelList
     property int helpInt: modelList.count > 0 ? 80 : 40
+    property int sumAllBusket: 0
 
     property string reaction_no: "../image/svg/reaction_no.svg"
     property string step_minus: "../image/svg/step_minus.svg"
@@ -78,6 +79,7 @@ Rectangle {
             for(var i = 0; i < modelList.count; i++){
                 sum +=  parseInt(modelList.get(i).cost * modelList.get(i).number)
             }
+            control.sumAllBusket = sum
             return sum.toString()
         }
     }

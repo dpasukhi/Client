@@ -291,11 +291,21 @@ ApplicationWindow {
             }
             onPressed: {
                 if(addressField.acceptableInput){
-                    while(menuBasket.modelBasket.count != 0) {
-                        let i = menuBasket.modelBasket.count - 1
-                        menuBasket.modelBasket.remove(i)
+                    api_class.setOrderSumPrice(menuBasket.sumAllBusket)
+                    api_class.setOrderOfficeID(comboId.currentId)
+                    api_class.setOrderAdress(addressField.text)
+                    for(var j = 0; j < menuBasket.modelBasket.count; j++) {
+                        for(var k = 0; k < menuBasket.modelBasket.get(j).number; k++) {
+                            api_class.setOrderID(menuBasket.modelBasket.get(k).pizzaId)
+                        }
                     }
-                    buyMenu.visible = false
+                    if(api_class.sendOrder()) {
+                        while(menuBasket.modelBasket.count != 0) {
+                            let i = menuBasket.modelBasket.count - 1
+                            menuBasket.modelBasket.remove(i)
+                        }
+                        buyMenu.visible = false
+                    }
                 }
             }
         }
