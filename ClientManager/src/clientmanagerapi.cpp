@@ -18,12 +18,40 @@ ClientManagerAPI::ClientManagerAPI(QObject *parent) : QObject(parent)
 bool ClientManagerAPI::authorization(const QString& theLogin,
                                      const QString& thePassword)
 {
-  return true;
+  QByteArray aLogin(theLogin.toStdString().c_str());
+  QByteArray aPassword(thePassword.toStdString().c_str());
+  QNetworkRequest aRequest;
+  aRequest.setRawHeader("Login", aLogin);
+  aRequest.setRawHeader("Password", aPassword);
+  myCore.SendRecieve(aRequest,QByteArray(), ClientCore::operations::authorization, ClientCore::clients::manager);
+  QByteArray aRes;
+  QNetworkReply* aRep;
+  if(!myCore.GetResult(aRes, &aRep))
+    return false;
+  if(aRep->rawHeader("Reply") == "accepted")
+  {
+    myCore.Authorization(theLogin, thePassword);
+    return true;
+  }
+  return false;
 }
 
 bool ClientManagerAPI::requestOrders()
 {
-  return true;
+  clearOrder();
+  QNetworkRequest aRequest;
+  myCore.SendRecieve(aRequest,QByteArray(), ClientCore::operations::order_list, ClientCore::clients::manager);
+  QByteArray aRes;
+  QNetworkReply* aRep;
+  if(!myCore.GetResult(aRes, &aRep))
+    return false;
+  if(aRep->rawHeader("Reply") == "accepted")
+  {
+    myOrderGet = true;
+    parseOrder(aRes);
+    return true;
+  }
+  return false;
 }
 
 bool ClientManagerAPI::requestOrders(const QString& thePath)
@@ -35,13 +63,27 @@ bool ClientManagerAPI::requestOrders(const QString& thePath)
     return false;
   QByteArray myContent = aFile.readAll();
   aFile.close();
+  myOrderGet = true;
   parseOrder(myContent);
   return true;
 }
 
 bool ClientManagerAPI::deleteOrder(const qint32 theOrderID)
 {
-  return true;
+  QNetworkRequest aRequest;
+  QString anID(theOrderID);
+  aRequest.setRawHeader("ID", anID.toStdString().c_str());
+  QByteArray anOrder;
+  myCore.SendRecieve(aRequest, anOrder, ClientCore::operations::order_remove, ClientCore::clients::manager);
+  QByteArray aRes;
+  QNetworkReply* aRep;
+  if(!myCore.GetResult(aRes, &aRep))
+    return false;
+  if(aRep->rawHeader("Reply") == "accepted")
+  {
+    return true;
+  }
+  return false;
 }
 
 void ClientManagerAPI::clearOrder()
