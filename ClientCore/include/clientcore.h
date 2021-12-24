@@ -36,7 +36,7 @@ public:
                                const clients theClient);
 
   bool GetResult(QByteArray& theArray,
-                 QNetworkReply* theReply);
+                 QNetworkReply** theReply);
 
 private:
 
@@ -58,7 +58,7 @@ private:
   QByteArray m_cache;
   QString login;
   QString password;
-  const QString url = "http://127.0.0.1:8800/";
+  const QString url = "http://127.0.0.1:8800";
   QNetworkReply* m_currentReply {nullptr};    // Current request being processed
   QNetworkAccessManager m_manager;            // Network manager for downloading files
 };
