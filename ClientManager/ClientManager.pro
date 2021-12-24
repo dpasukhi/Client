@@ -12,12 +12,10 @@ VPATH += ./src
 
 SOURCES += \
     clientmanagerapi.cpp \
-    jsondata.cpp \
     main.cpp
 
 HEADERS += \
-    include/clientmanagerapi.h \
-    include/jsondata.h
+    include/clientmanagerapi.h
 
 INCLUDEPATH = ./include/
 
