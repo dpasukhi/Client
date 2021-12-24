@@ -5,6 +5,20 @@ import QtGraphicalEffects 1.15
 Rectangle {
     id: control
 
+    property alias regContinue: buttonReg
+    property bool regReady: fieldNameFirst.statusFill && fieldNameSecond.statusFill &&
+                            fieldNameThird.statusFill && fieldPhone.statusFill &&
+                            fieldEmail.statusFill && fieldLogin.statusFill &&
+                            fieldPassword.statusFill
+
+    property string nameFirst: fieldNameFirst.text
+    property string nameSecond: fieldNameSecond.text
+    property string nameThird: fieldNameThird.text
+    property string phone: fieldPhone.text
+    property string email: fieldEmail.text
+    property string login: fieldLogin.text
+    property string password: fieldPassword.text
+
     radius: 10
     color: "#50a684"
 
@@ -68,7 +82,7 @@ Rectangle {
         id:fieldNameThird
 
         hint: topHint
-        hintText: "Фамилия"
+        hintText: "Отчество"
         height: 32
 
         anchors {
@@ -102,11 +116,28 @@ Rectangle {
         id: fieldEmail
 
         hint: topHint
-        hintText: "Логин"
+        hintText: "Почта"
         height: 32
 
         anchors {
             top: fieldPhone.bottom
+            left: parent.left
+            right: parent.right
+            leftMargin: 5
+            rightMargin: 5
+            topMargin: 20
+        }
+    }
+
+    MyTextField {
+        id: fieldLogin
+
+        hint: topHint
+        hintText: "Логин"
+        height: 32
+
+        anchors {
+            top: fieldEmail.bottom
             left: parent.left
             right: parent.right
             leftMargin: 5
@@ -123,7 +154,7 @@ Rectangle {
         height: 32
 
         anchors {
-            top: fieldEmail.bottom
+            top: fieldLogin.bottom
             left: parent.left
             right: parent.right
             leftMargin: 5
@@ -144,5 +175,15 @@ Rectangle {
             rightMargin: 5
             bottomMargin: 5
         }
+    }
+
+    function clearField() {
+        fieldNameFirst.text = ""
+        fieldNameSecond.text = ""
+        fieldNameThird.text = ""
+        fieldPhone.text = ""
+        fieldEmail.text = ""
+        fieldLogin.text = ""
+        fieldPassword.text = ""
     }
 }

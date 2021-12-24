@@ -8,6 +8,7 @@ Rectangle {
     property alias textHeader: textHeaderId.text
     property alias textMain: textMainId.text
     property alias price: priceId.text
+    property int pizzaId: -1
 
     implicitWidth: 225 + itemId.anchors.rightMargin * 2
     implicitHeight: 425 + itemId.anchors.topMargin

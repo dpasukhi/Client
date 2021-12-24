@@ -14,6 +14,15 @@ ApplicationWindow {
 
     color: "#f8f8f8"
 
+    QtObject {
+        id: p
+
+        property int count: 0
+        property var list_officeName: []
+        property var list_officeAdress: []
+        property var list_officeId: []
+    }
+
     Rectangle {
         id: mainTableId
 
@@ -40,6 +49,7 @@ ApplicationWindow {
     MyButton {
         id: signId
 
+        property bool signOk: false
         width: 80
         height: 40
         textButton: "Вход"
@@ -51,8 +61,28 @@ ApplicationWindow {
         }
 
         onPressed: {
-            if(tableRegis.visible === false)
-                tableSign.visible = true
+            if(signId.signOk) {
+                signId.textButton = "Вход"
+                signId.signOk = false
+                loginUser.visible = false
+            } else {
+                if(tableRegis.visible === false)
+                    tableSign.visible = true
+            }
+        }
+
+        Text {
+            id: loginUser
+
+            font.pixelSize: 14
+            color: "black"
+            visible: false
+            text: ""
+            anchors {
+                right: parent.left
+                rightMargin: 10
+                verticalCenter: parent.verticalCenter
+            }
         }
     }
 
@@ -89,7 +119,14 @@ ApplicationWindow {
                     var name = api_class.getProductName(i);
                     var description = api_class.getProductDescription(i);
                     var price = api_class.getProductPrice(i);
-                    MyScript.createSpriteObjects(name, description, price);
+                    var id = api_class.getProductID(i);
+                    MyScript.createSpriteObjects(name, description, price, id);
+                }
+                p.count = api_class.getOfficeCount();
+                for (var j = 0; j < p.count; j++) {
+                    p.list_officeName.push(api_class.getOfficeName(j));
+                    p.list_officeAdress.push(api_class.getOfficeAdress(j));
+                    p.list_officeId.push(api_class.getOfficetID(j));
                 }
             }
         }
@@ -120,6 +157,18 @@ ApplicationWindow {
             tableSign.visible = false
             tableRegis.visible = true
         }
+        signButton.onPressed: {
+            if(tableSign.signReady) {
+                if(api_class.authorization(tableSign.login, tableSign.password)) {
+                    tableSign.visible = false
+                    loginUser.text = tableSign.login
+                    loginUser.visible = true
+                    signId.textButton = "Выйти"
+                    signId.signOk = true
+                    tableSign.clearField()
+                }
+            }
+        }
     }
 
     TableReg {
@@ -127,11 +176,25 @@ ApplicationWindow {
 
         visible: false
         width: 200
-        height: 400
+        height: 450
         anchors {
             top: signId.bottom
             right: signId.right
             topMargin: 5
+        }
+
+        regContinue.onPressed: {
+            if(tableRegis.regReady) {
+                if(api_class.registration(tableRegis.nameFirst, tableRegis.nameSecond, tableRegis.nameThird,
+                                          tableRegis.phone, tableRegis.email, tableRegis.login, tableRegis.password)) {
+                    tableRegis.visible = false
+                    loginUser.text = tableRegis.login
+                    loginUser.visible = true
+                    signId.textButton = "Выйти"
+                    signId.signOk = true
+                    tableRegis.clearField()
+                }
+            }
         }
     }
 
@@ -148,7 +211,13 @@ ApplicationWindow {
         ComboBox{
             id: comboId
 
-            onActivated: textComboId.text = comboId.currentText
+            property int currentId: 0
+
+            onActivated: {
+                comboId.displayText = comboId.currentText
+                var num = p.list_officeName.indexOf(comboId.currentText, 0)
+                comboId.currentId = p.list_officeId[num]
+            }
 
             anchors {
                 left: parent.left

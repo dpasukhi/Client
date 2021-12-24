@@ -8,7 +8,7 @@ T.TextField {
 
     readonly property int topHint: 0
     readonly property int bottomHint: 1
-
+    property bool statusFill: false
     property int hint: -1
     property string hintText: ""
 
@@ -71,6 +71,10 @@ T.TextField {
             PropertyChanges {
                 target: rootComponentRec
                 visible: false
+            }
+            PropertyChanges {
+                target: rootComponent
+                statusFill: true
             }
         }
     ]
