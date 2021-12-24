@@ -6,6 +6,10 @@ Rectangle {
     id: control
 
     property alias regButton: buttonReg
+    property alias signButton: buttonSign
+    property bool signReady: fieldPhone.statusFill && fieldPassword.statusFill
+    property string login: fieldPhone.text
+    property string password: fieldPassword.text
 
     radius: 10
     color: "#50a684"
@@ -51,6 +55,8 @@ Rectangle {
     }
 
     MyTextField {
+        id: fieldPassword
+
         hint: topHint
         hintText: "Пароль"
         height: 32
@@ -92,5 +98,10 @@ Rectangle {
             rightMargin: 5
             bottomMargin: 5
         }
+    }
+
+    function clearField() {
+        fieldPhone.text = ""
+        fieldPassword.text = ""
     }
 }

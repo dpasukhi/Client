@@ -46,6 +46,8 @@ ApplicationWindow {
     MyButton {
         id: signId
 
+        property bool signOk: false
+
         width: 80
         height: 40
         textButton: "Вход"
@@ -56,7 +58,29 @@ ApplicationWindow {
             rightMargin: 10
         }
 
-        onPressed: tableSign.visible = true
+        onPressed: {
+            if(signId.signOk) {
+                signId.textButton = "Вход"
+                signId.signOk = false
+                loginUser.visible = false
+            } else {
+                tableSign.visible = true
+            }
+        }
+
+        Text {
+            id: loginUser
+
+            font.pixelSize: 14
+            color: "black"
+            visible: false
+            text: ""
+            anchors {
+                right: parent.left
+                rightMargin: 10
+                verticalCenter: parent.verticalCenter
+            }
+        }
     }
 
     Flickable {
@@ -116,9 +140,17 @@ ApplicationWindow {
             right: signId.right
             topMargin: 5
         }
-        regButton.onPressed: {
-            tableSign.visible = false
-            tableRegis.visible = true
+        signButton.onPressed: {
+            if(tableSign.signReady) {
+                if(json_class.authorization(tableSign.login, tableSign.password)) {
+                    tableSign.visible = false
+                    loginUser.text = tableSign.login
+                    loginUser.visible = true
+                    signId.textButton = "Выйти"
+                    signId.signOk = true
+                    tableSign.clearField()
+                }
+            }
         }
     }
 
@@ -152,11 +184,13 @@ ApplicationWindow {
                 bottomMargin: 10
             }
             onPressed: {
-                accessMenu.visible = false
-                gridId.visible = true
-                var num = list_order.indexOf(tmp_order, 0)
-                list_order.splice(num, 1)
-                tmp_order.destroy()
+                if(json_class.deleteOrder(tmp_order.id_order)) {
+                    accessMenu.visible = false
+                    gridId.visible = true
+                    var num = list_order.indexOf(tmp_order, 0)
+                    list_order.splice(num, 1)
+                    tmp_order.destroy()
+                }
             }
         }
 
@@ -251,15 +285,15 @@ ApplicationWindow {
                 list_order.pop()
             }
 
-            var num = json_class.getNum();
-            for(var j = 0; j < num; j++) {
-                let name = json_class.getName(j);
-                let id_order = json_class.getId_order(j);
-                let office_adress = json_class.getOffice_adress(j);
-                let order_adress = json_class.getOrder_adress(j);
-                let data_order = json_class.getData_order(j);
-                let name_deliver = json_class.getName_deliver(j);
-                let name_client = json_class.getName_client(j);
+            var num = json_class.getOrderCount();
+            for (var i = 0; i < num; i++) {
+                let name = json_class.getOrderOfficeName(i);
+                let id_order = json_class.getOrderID(i);
+                let office_adress = json_class.getOrderOfficeAdress(i);
+                let order_adress = json_class.getOrderAdress(i);
+                let data_order = json_class.getOrderData(i);
+                let name_deliver = json_class.getNameDeliver(i);
+                let name_client = json_class.getNameClient(i);
                 let comp = Qt.createComponent("OrderItem.qml");
                 let obj = comp.createObject(gridId, {textHeader: name, id_order: id_order, office_adress: office_adress, order_adress: order_adress, data_order: data_order, name_deliver: name_deliver, name_client: name_client});
                 list_order.push(obj)
