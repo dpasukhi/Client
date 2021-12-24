@@ -2,7 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <clientcore.h>
-#include "jsondata.h"
+#include <clientmanagerapi.h>
 
 int main(int argc, char *argv[])
 {
@@ -12,8 +12,8 @@ int main(int argc, char *argv[])
 
   QQmlApplicationEngine engine;
 
-  JsonData my_data;
-  my_data.jsonParse("../../Client/ClientManager/qml", "message.json");
+  ClientManagerAPI my_data;
+  my_data.requestOrders("../../Client/ClientManager/qml/message.json");
   auto root_context = engine.rootContext();
   root_context->setContextProperty("json_class", &my_data);
 

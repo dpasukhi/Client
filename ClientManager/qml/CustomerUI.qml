@@ -88,15 +88,15 @@ ApplicationWindow {
             }
 
             Component.onCompleted: {
-                var num = json_class.getNum();
+                var num = json_class.getOrderCount();
                 for (var i = 0; i < num; i++) {
-                    let name = json_class.getName(i);
-                    let id_order = json_class.getId_order(i);
-                    let office_adress = json_class.getOffice_adress(i);
-                    let order_adress = json_class.getOrder_adress(i);
-                    let data_order = json_class.getData_order(i);
-                    let name_deliver = json_class.getName_deliver(i);
-                    let name_client = json_class.getName_client(i);
+                    let name = json_class.getOrderOfficeName(i);
+                    let id_order = json_class.getOrderID(i);
+                    let office_adress = json_class.getOrderOfficeAdress(i);
+                    let order_adress = json_class.getOrderAdress(i);
+                    let data_order = json_class.getOrderData(i);
+                    let name_deliver = json_class.getNameDeliver(i);
+                    let name_client = json_class.getNameClient(i);
                     let comp = Qt.createComponent("OrderItem.qml");
                     let obj = comp.createObject(gridId, {textHeader: name, id_order: id_order, office_adress: office_adress, order_adress: order_adress, data_order: data_order, name_deliver: name_deliver, name_client: name_client});
                     list_order.push(obj)
