@@ -12,8 +12,8 @@ int main(int argc, char *argv[])
   QQmlApplicationEngine engine;
 
   ClientCustomerAPI myAPI;
-  myAPI.requestProducts("../../Client/ClientCustomer/qml/message.json");
-  myAPI.requestOffices("../../Client/ClientCustomer/qml/office.json");
+  myAPI.requestProducts(/*"../../Client/ClientCustomer/qml/message.json"*/);
+  myAPI.requestOffices(/*"../../Client/ClientCustomer/qml/office.json"*/);
   auto root_context = engine.rootContext();
   root_context->setContextProperty("api_class", &myAPI);
   root_context->setContextProperty("myModel", QVariant::fromValue(myAPI.getDataOffice()));

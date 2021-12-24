@@ -26,7 +26,7 @@ bool ClientCustomerAPI::authorization(const QString& theLogin,
   myCore.SendRecieve(aRequest,QByteArray(), ClientCore::operations::authorization, ClientCore::clients::customer);
   QByteArray aRes;
   QNetworkReply* aRep;
-  if(!myCore.GetResult(aRes, aRep))
+  if(!myCore.GetResult(aRes, &aRep))
     return false;
   if(aRep->rawHeader("Reply") == "accepted")
   {
@@ -62,7 +62,7 @@ bool ClientCustomerAPI::registration(const QString& theName,
   myCore.SendRecieve(aRequest,QByteArray(), ClientCore::operations::registration, ClientCore::clients::customer);
   QByteArray aRes;
   QNetworkReply* aRep;
-  if(!myCore.GetResult(aRes, aRep))
+  if(!myCore.GetResult(aRes, &aRep))
     return false;
   if(aRep->rawHeader("Reply") == "accepted")
   {
@@ -79,7 +79,7 @@ bool ClientCustomerAPI::requestProducts()
   myCore.SendRecieve(aRequest,QByteArray(), ClientCore::operations::product_list, ClientCore::clients::customer);
   QByteArray aRes;
   QNetworkReply* aRep;
-  if(!myCore.GetResult(aRes, aRep))
+  if(!myCore.GetResult(aRes, &aRep))
     return false;
   if(aRep->rawHeader("Reply") == "accepted")
   {
@@ -110,12 +110,12 @@ bool ClientCustomerAPI::requestOffices()
   myCore.SendRecieve(aRequest,QByteArray(), ClientCore::operations::office_list, ClientCore::clients::customer);
   QByteArray aRes;
   QNetworkReply* aRep;
-  if(!myCore.GetResult(aRes, aRep))
+  if(!myCore.GetResult(aRes, &aRep))
     return false;
   if(aRep->rawHeader("Reply") == "accepted")
   {
     myProductsGet = true;
-    parseProduct(aRes);
+    parseOffices(aRes);
     return true;
   }
   return false;
@@ -231,7 +231,7 @@ bool ClientCustomerAPI::sendOrder()
   myCore.SendRecieve(aRequest, anOrder, ClientCore::operations::order_send, ClientCore::clients::customer);
   QByteArray aRes;
   QNetworkReply* aRep;
-  if(!myCore.GetResult(aRes, aRep))
+  if(!myCore.GetResult(aRes, &aRep))
     return false;
   if(aRep->rawHeader("Reply") == "accepted")
   {

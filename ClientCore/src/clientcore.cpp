@@ -27,21 +27,22 @@ bool ClientCore::SendRecieve(QNetworkRequest& theRequest,
 {
   myIsGetted = true;
   m_cache.clear();
-  QNetworkReply *reply = Send(theRequest, thePostData, theOp, theClient);
+  delete m_currentReply;
+  m_currentReply = Send(theRequest, thePostData, theOp, theClient);
   QEventLoop loop;
-  QEventLoop::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+  QEventLoop::connect(m_currentReply, SIGNAL(finished()), &loop, SLOT(quit()));
   // FIXME: no error handler
   loop.exec();
-  m_cache.append(reply->readAll());
+  m_cache.append(m_currentReply->readAll());
   return true;
 }
 
-bool ClientCore::GetResult(QByteArray& theArray, QNetworkReply* theReply)
+bool ClientCore::GetResult(QByteArray& theArray, QNetworkReply** theReply)
 {
   if (myIsGetted != true)
     return false;
   theArray = m_cache;
-  theReply = m_currentReply;
+  *theReply = m_currentReply;
   return true;
 }
 
@@ -92,6 +93,6 @@ QString ClientCore::GetTypeClient(const ClientCore::clients theClient)
 
 void ClientCore::initRequest(QNetworkRequest& theRequest, const operations theOp, const clients theClient)
 {
-  theRequest.setUrl(url+GetTypeSend(theOp));
-  theRequest.setRawHeader("Cleint", GetTypeClient(theClient).toStdString().c_str());
+  theRequest.setUrl(url + "/" + GetTypeClient(theClient));
+  theRequest.setRawHeader("Type", GetTypeSend(theOp).toStdString().c_str());
 }
