@@ -227,7 +227,6 @@ ApplicationWindow {
                 right: parent.right
                 rightMargin: 10
             }
-
             model: myModel
             background: Rectangle{
                 id: comboIdBack
@@ -297,6 +296,7 @@ ApplicationWindow {
                     for(var j = 0; j < menuBasket.modelBasket.count; j++) {
                         for(var k = 0; k < menuBasket.modelBasket.get(j).number; k++) {
                             api_class.setOrderID(menuBasket.modelBasket.get(k).pizzaId)
+                            console.log(menuBasket.modelBasket.get(k).pizzaId)
                         }
                     }
                     if(api_class.sendOrder()) {

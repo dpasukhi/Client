@@ -313,16 +313,17 @@ ApplicationWindow {
             while(list_order.length != 0) {
                 list_order.pop()
             }
-
-            var num = json_class.getOrderCount();
-            for (var i = 0; i < num; i++) {
-                let name = json_class.getOrderOfficeName(i);
-                let id_order = json_class.getOrderID(i);
-                let office_adress = json_class.getOrderOfficeAdress(i);
-                let order_adress = json_class.getOrderAdress(i);
-                let comp = Qt.createComponent("OrderItem.qml");
-                let obj = comp.createObject(gridId, {textHeader: name, id_order: id_order, office_adress: office_adress, order_adress: order_adress});
-                list_order.push(obj)
+            if(json_class.requestOrders()) {
+                var num = json_class.getOrderCount();
+                for (var i = 0; i < num; i++) {
+                    let name = json_class.getOrderOfficeName(i);
+                    let id_order = json_class.getOrderID(i);
+                    let office_adress = json_class.getOrderOfficeAdress(i);
+                    let order_adress = json_class.getOrderAdress(i);
+                    let comp = Qt.createComponent("OrderItem.qml");
+                    let obj = comp.createObject(gridId, {textHeader: name, id_order: id_order, office_adress: office_adress, order_adress: order_adress});
+                    list_order.push(obj)
+                }
             }
         }
     }
