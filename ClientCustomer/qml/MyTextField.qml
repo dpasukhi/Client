@@ -18,7 +18,7 @@ T.TextField {
     topPadding: 1
     bottomPadding: 1
     verticalAlignment: TextInput.AlignVCenter
-    validator: RegExpValidator{regExp: /[A-z]+/}
+    validator: RegExpValidator{regExp: /[A-za-zА-Яа-я0-9/ ]+/}
 
     background: Rectangle {
         id: backRect
