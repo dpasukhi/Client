@@ -71,7 +71,8 @@ bool ClientManagerAPI::requestOrders(const QString& thePath)
 bool ClientManagerAPI::deleteOrder(const qint32 theOrderID)
 {
   QNetworkRequest aRequest;
-  QString anID(theOrderID);
+  QString anID;
+  anID.setNum(theOrderID);
   aRequest.setRawHeader("ID", anID.toStdString().c_str());
   QByteArray anOrder;
   myCore.SendRecieve(aRequest, anOrder, ClientCore::operations::order_remove, ClientCore::clients::manager);

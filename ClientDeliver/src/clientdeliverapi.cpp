@@ -74,7 +74,8 @@ bool ClientDeliverAPI::sendStatus(const qint32 theOrderID,
   QNetworkRequest aRequest;
   QString aSts(theStatus);
   aRequest.setRawHeader("status", aSts.toStdString().c_str());
-  QString anID(theOrderID);
+  QString anID;
+  anID.setNum(theOrderID);
   aRequest.setRawHeader("ID", anID.toStdString().c_str());
   QByteArray anOrder;
   myCore.SendRecieve(aRequest, anOrder, ClientCore::operations::status_send, ClientCore::clients::deliver);

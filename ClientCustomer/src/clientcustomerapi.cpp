@@ -248,23 +248,8 @@ QByteArray ClientCustomerAPI::createOrder() const
   {
     QJsonObject anObj;
     anObj.insert("order_id", myOrderID[i]);
-    QJsonValue aValue(anObj);
-    jsonArray.append(aValue);
-  }
-  {
-    QJsonObject anObj;
     anObj.insert("order_sum_price", mySumPrice);
-    QJsonValue aValue(anObj);
-    jsonArray.append(aValue);
-  }
-  {
-    QJsonObject anObj;
     anObj.insert("order_office_id", myOrderOfficeID);
-    QJsonValue aValue(anObj);
-    jsonArray.append(aValue);
-  }
-  {
-    QJsonObject anObj;
     anObj.insert("order_adress", myOrderAdress);
     QJsonValue aValue(anObj);
     jsonArray.append(aValue);
@@ -272,8 +257,5 @@ QByteArray ClientCustomerAPI::createOrder() const
   QJsonObject json;
   json.insert("order", jsonArray);
   QJsonDocument aDoc(json);
-  std::ofstream out;          // поток для записи
-  out.open("D:\\hello.txt"); // окрываем файл для записи
-  out << aDoc.toBinaryData().toStdString();
-  return aDoc.toBinaryData();
+  return aDoc.toJson();
 }

@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 
   ClientDeliverAPI my_data;
   ChangeFileJS changeSome;
-  my_data.requestOrders("../../Client/ClientDeliver/qml/message.json");
+  my_data.requestOrders(/*"../../Client/ClientDeliver/qml/message.json"*/);
   auto root_context = engine.rootContext();
   root_context->setContextProperty("json_class", &my_data);
   root_context->setContextProperty("ChangeFileJS", &changeSome);
