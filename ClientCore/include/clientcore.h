@@ -16,7 +16,9 @@ public:
     registration,
     order_list,
     office_list,
-    order_send
+    order_send,
+    status_send,
+    order_remove
   };
   enum clients
   {

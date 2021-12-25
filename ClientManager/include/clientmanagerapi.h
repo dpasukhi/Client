@@ -1,7 +1,7 @@
 #ifndef CLIENTMANAGERAPI_H
 #define CLIENTMANAGERAPI_H
 
-//#include <clientcore.h>
+#include <clientcore.h>
 #include <QObject>
 
 class ClientManagerAPI : public QObject
@@ -54,6 +54,7 @@ private:
   QVector <QString> myNameDeliver;
   QVector <QString> myNameClient;
 
+  ClientCore myCore;
 };
 
 #endif // CLIENTMANAGERAPI_H

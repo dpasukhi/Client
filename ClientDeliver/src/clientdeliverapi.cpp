@@ -18,12 +18,40 @@ ClientDeliverAPI::ClientDeliverAPI(QObject *parent) : QObject(parent)
 bool ClientDeliverAPI::authorization(const QString& theLogin,
                                      const QString& thePassword)
 {
-  return true;
+  QByteArray aLogin(theLogin.toStdString().c_str());
+  QByteArray aPassword(thePassword.toStdString().c_str());
+  QNetworkRequest aRequest;
+  aRequest.setRawHeader("Login", aLogin);
+  aRequest.setRawHeader("Password", aPassword);
+  myCore.SendRecieve(aRequest,QByteArray(), ClientCore::operations::authorization, ClientCore::clients::deliver);
+  QByteArray aRes;
+  QNetworkReply* aRep;
+  if(!myCore.GetResult(aRes, &aRep))
+    return false;
+  if(aRep->rawHeader("Reply") == "accepted")
+  {
+    myCore.Authorization(theLogin, thePassword);
+    return true;
+  }
+  return false;
 }
 
 bool ClientDeliverAPI::requestOrders()
 {
-  return true;
+  clearOrder();
+  QNetworkRequest aRequest;
+  myCore.SendRecieve(aRequest,QByteArray(), ClientCore::operations::order_list, ClientCore::clients::deliver);
+  QByteArray aRes;
+  QNetworkReply* aRep;
+  if(!myCore.GetResult(aRes, &aRep))
+    return false;
+  if(aRep->rawHeader("Reply") == "accepted")
+  {
+    myOrderGet = true;
+    parseOrder(aRes);
+    return true;
+  }
+  return false;
 }
 
 bool ClientDeliverAPI::requestOrders(const QString& thePath)
@@ -35,14 +63,31 @@ bool ClientDeliverAPI::requestOrders(const QString& thePath)
     return false;
   QByteArray myContent = aFile.readAll();
   aFile.close();
+  myOrderGet = true;
   parseOrder(myContent);
   return true;
 }
 
 bool ClientDeliverAPI::sendStatus(const qint32 theOrderID,
-                                  const qint32& theStatus)
+                                  const qint32 theStatus)
 {
-  return true;
+  QNetworkRequest aRequest;
+  QString aSts(theStatus);
+  aRequest.setRawHeader("status", aSts.toStdString().c_str());
+  QString anID;
+  anID.setNum(theOrderID);
+  aRequest.setRawHeader("ID", anID.toStdString().c_str());
+  QByteArray anOrder;
+  myCore.SendRecieve(aRequest, anOrder, ClientCore::operations::status_send, ClientCore::clients::deliver);
+  QByteArray aRes;
+  QNetworkReply* aRep;
+  if(!myCore.GetResult(aRes, &aRep))
+    return false;
+  if(aRep->rawHeader("Reply") == "accepted")
+  {
+    return true;
+  }
+  return false;
 }
 
 void ClientDeliverAPI::clearOrder()

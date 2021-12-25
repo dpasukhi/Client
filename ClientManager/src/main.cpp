@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
   QQmlApplicationEngine engine;
 
   ClientManagerAPI my_data;
-  my_data.requestOrders("../../Client/ClientManager/qml/message.json");
+  my_data.requestOrders(/*"../../Client/ClientManager/qml/message.json"*/);
   auto root_context = engine.rootContext();
   root_context->setContextProperty("json_class", &my_data);
 

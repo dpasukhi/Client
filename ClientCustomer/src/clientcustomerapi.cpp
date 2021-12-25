@@ -225,7 +225,6 @@ QStringList ClientCustomerAPI::getDataOffice() const
 
 bool ClientCustomerAPI::sendOrder()
 {
-  clearOrder();
   QNetworkRequest aRequest;
   QByteArray anOrder = createOrder();
   myCore.SendRecieve(aRequest, anOrder, ClientCore::operations::order_send, ClientCore::clients::customer);
@@ -240,25 +239,23 @@ bool ClientCustomerAPI::sendOrder()
   }
   return false;
 }
+#include <fstream>
 
 QByteArray ClientCustomerAPI::createOrder() const
 {
-  QJsonDocument aDoc;
-  if (aDoc.isObject())
+  QJsonArray jsonArray;
+  for(int i = 0; i < myOrderCount; i++)
   {
-    QJsonObject json = aDoc.object();
-    QJsonArray jsonArray;// = json["office"].toArray();
-    foreach (const qint32& value, myOrderID)
-    {
-//      if (value.isObject())
-//      {
-//        QJsonObject obj = value.toObject();
-//        this->myOfficeNames.push_back(obj["name"].toString());
-//        this->myOfficeAdress.push_back(obj["adress"].toString());
-//        this->myOfficeID.push_back(obj["id"].toInt());
-//        this->myOfficeCount += 1;
-//      }
-    }
+    QJsonObject anObj;
+    anObj.insert("order_id", myOrderID[i]);
+    anObj.insert("order_sum_price", mySumPrice);
+    anObj.insert("order_office_id", myOrderOfficeID);
+    anObj.insert("order_adress", myOrderAdress);
+    QJsonValue aValue(anObj);
+    jsonArray.append(aValue);
   }
-  return aDoc.toBinaryData();
+  QJsonObject json;
+  json.insert("order", jsonArray);
+  QJsonDocument aDoc(json);
+  return aDoc.toJson();
 }

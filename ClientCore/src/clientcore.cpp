@@ -69,6 +69,12 @@ QString ClientCore::GetTypeSend(const ClientCore::operations theOp)
     case order_send :
       aRes = "order_send";
       break;
+    case status_send:
+      aRes = "status_send";
+      break;
+    case order_remove:
+      aRes = "order_remove";
+      break;
   }
   return aRes;
 }
